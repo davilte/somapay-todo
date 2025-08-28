@@ -58,6 +58,7 @@ export default function EditTodoScreen() {
       <TextInput
         className="border border-gray-300 rounded-lg px-3 py-2 mb-4"
         placeholder="Título da tarefa"
+        placeholderTextColor="gray"
         value={title}
         onChangeText={setTitle}
       />
@@ -66,6 +67,7 @@ export default function EditTodoScreen() {
       <TextInput
         className="border border-gray-300 rounded-lg px-3 py-2 mb-4"
         placeholder="Descrição"
+        placeholderTextColor="gray"
         value={description}
         onChangeText={setDescription}
         multiline
