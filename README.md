@@ -1,50 +1,84 @@
-# Welcome to your Expo app 👋
+# To-Do App – README
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 1. Visão Geral
+Este é um aplicativo de lista de tarefas desenvolvido em **React Native com Expo**, usando **Zustand** para gerenciamento de estado global e **react-native-mmkv** para persistência offline. O app permite:  
 
-## Get started
+- Adicionar, editar e excluir tarefas.  
+- Marcar tarefas como concluídas ou pendentes.  
+- Filtrar tarefas por status (todas, pendentes, concluídas).  
+- Menu de ações discreto com popover em cada tarefa.  
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 2. Decisões Técnicas
 
-2. Start the app
+### 2.1 Gerenciamento de Estado
+- **Biblioteca escolhida:** [Zustand](https://github.com/pmndrs/zustand)  
+- **Justificativa:**  
+  - Simples e leve para projetos pequenos/médios.  
+  - Evita boilerplate do Redux, mantendo tipagem clara com TypeScript.  
+  - Suporta middleware de persistência, facilitando a integração com MMKV.  
 
-   ```bash
-   npx expo start
-   ```
+### 2.2 Persistência de Dados Offline
+- **Biblioteca escolhida:** [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)  
+- **Justificativa:**  
+  - Performance superior ao AsyncStorage.  
+  - Fácil integração com Zustand via `zustand/middleware/persist`.  
+  - Permite armazenamento seguro e rápido de objetos JSON (listas de tarefas).  
 
-In the output, you'll find options to open the app in a
+### 2.3 Navegação
+- **Biblioteca escolhida:** [Expo Router](https://expo.github.io/router/)  
+- **Justificativa:**  
+  - Simples para estruturar múltiplas telas.  
+  - Permite navegar para tela de adicionar/editar tarefas de forma clara.  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 2.4 Geração de IDs
+- **Biblioteca escolhida:** [expo-crypto + custom hook useId](https://docs.expo.dev/versions/latest/sdk/crypto/)  
+- **Justificativa:**  
+  - `uuid` tradicional não funciona com Hermes sem polyfills.  
+  - `expo-crypto` garante geração segura de IDs únicos.  
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 2.5 UI / Componentes
+- **Bibliotecas:** `NativeWind` (TailwindCSS para React Native), `Ionicons`  
+- **Justificativa:**  
+  - `NativeWind` facilita estilização rápida e consistente.  
+  - Ícones do `Ionicons` melhoram a UX sem poluir o layout.
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 3. Como Rodar no Emulador
+
+> ⚠️ **Atenção:** O `react-native-mmkv` exige execução em ambiente com código nativo. **Não funciona no Expo Go**. Você precisa rodar no **emulador** ou em um **dispositivo físico** com o cliente de desenvolvimento Expo (`npx expo run:android` ou `npx expo run:ios`).
+
+### Passos:
+
+1. **Instale as dependências do projeto**
 
 ```bash
-npm run reset-project
+npm install
+# ou
+yarn install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. **Inicie o Metro bundler**
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. **Rodando no Android (emulador ou dispositivo físico)**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo run:android
+```
 
-## Join the community
+4. **Rodando no iOS (emulador ou dispositivo físico)**
 
-Join our community of developers creating universal apps.
+```bash
+npx expo run:ios
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+5. **Observações**
+
+- Certifique-se de ter o emulador Android/iOS configurado corretamente.
+- No primeiro build, o Expo vai compilar o código nativo necessário para o MMKV.
