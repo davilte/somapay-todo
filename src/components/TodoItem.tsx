@@ -95,7 +95,7 @@ export default function TodoItem({ item, onToggle, onRemove, onPress, menuVisibl
                             onPress={handleEdit}
                         >
                             <Ionicons name="pencil" size={18} color="black" className="mr-2" />
-                            <Text>Edit</Text>
+                            <Text>Editar</Text>
                         </TouchableOpacity>
 
                         {/* Opção Deletar */}
@@ -104,7 +104,7 @@ export default function TodoItem({ item, onToggle, onRemove, onPress, menuVisibl
                             onPress={handleDelete}
                         >
                             <Ionicons name="trash" size={18} color="red" className="mr-2" />
-                            <Text className="text-red-500">Delete</Text>
+                            <Text className="text-red-500">Excluir</Text>
                         </TouchableOpacity>
                     </View>
                 </Pressable>
